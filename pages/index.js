@@ -1,5 +1,4 @@
 import MeetupList from "../components/meetups/MeetupList";
-import {useEffect, useState} from "react";
 
 const DUMMY_MEETUPS = [
     {
@@ -30,15 +29,24 @@ const HomePage = (props) => {
     )
 }
 
-export async function getStaticProps() {
-    // do DB connection here, data fetch, etc. Never reaches client machine
-    // will be executed on the server, cause it is run during the build process
-
+export async function getServerSideProps() {
+    // fetch data from any data source
     return {
         props : {
-           meetups: DUMMY_MEETUPS
-        },
-        revalidate: 10 // 10 seconds (from 1 to *)
+            meetups: DUMMY_MEETUPS
+        }
     }
 }
+
+// export async function getStaticProps() {
+//     // do DB connection here, data fetch, etc. Never reaches client machine
+//     // will be executed on the server, cause it is run during the build process
+//
+//     return {
+//         props : {
+//            meetups: DUMMY_MEETUPS
+//         },
+//         revalidate: 10 // 10 seconds (from 1 to *)
+//     }
+// }
 export default HomePage;
